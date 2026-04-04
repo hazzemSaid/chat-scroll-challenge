@@ -16,3 +16,6 @@ pubspec.lock
 
 # Misc
 *.log
+
+# API Key
+lib/apikey.dart
