@@ -131,67 +131,69 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
                   itemBuilder: itemBuilder,
                 );
               },
-              imageMessageBuilder: (
-                context,
-                message,
-                index, {
-                required bool isSentByMe,
-                MessageGroupStatus? groupStatus,
-              }) =>
-                  FlyerChatImageMessage(
-                message: message,
-                index: index,
-                showTime: false,
-                showStatus: false,
-              ),
+              imageMessageBuilder:
+                  (
+                    context,
+                    message,
+                    index, {
+                    required bool isSentByMe,
+                    MessageGroupStatus? groupStatus,
+                  }) => FlyerChatImageMessage(
+                    message: message,
+                    index: index,
+                    showTime: false,
+                    showStatus: false,
+                  ),
               // _Composer now reads isStreaming from the provider — no prop needed.
-              composerBuilder: (context) => _Composer(onStop: _stopCurrentStream),
-              textMessageBuilder: (
-                context,
-                message,
-                index, {
-                required bool isSentByMe,
-                MessageGroupStatus? groupStatus,
-              }) =>
-                  FlyerChatTextMessage(
-                message: message,
-                index: index,
-                showTime: false,
-                showStatus: false,
-                receivedBackgroundColor: Colors.transparent,
-                padding: message.authorId == _agent.id
-                    ? EdgeInsets.zero
-                    : const EdgeInsets.symmetric(
-                        horizontal: 14,
-                        vertical: 10,
-                      ),
-              ),
-              textStreamMessageBuilder: (
-                context,
-                message,
-                index, {
-                required bool isSentByMe,
-                MessageGroupStatus? groupStatus,
-              }) {
-                final streamState = context
-                    .watch<GeminiStreamManager>()
-                    .getState(message.streamId);
-                return FlyerChatTextStreamMessage(
-                  message: message,
-                  index: index,
-                  streamState: streamState,
-                  chunkAnimationDuration: _kChunkAnimationDuration,
-                  showTime: false,
-                  showStatus: false,
-                  receivedBackgroundColor: Colors.transparent,
-                  padding: message.authorId == _agent.id
-                      ? EdgeInsets.zero
-                      : const EdgeInsets.symmetric(
-                          horizontal: 14,
-                          vertical: 10,
-                        ),
-                );
-              },
+              composerBuilder: (context) =>
+                  _Composer(onStop: _stopCurrentStream),
+              textMessageBuilder:
+                  (
+                    context,
+                    message,
+                    index, {
+                    required bool isSentByMe,
+                    MessageGroupStatus? groupStatus,
+                  }) => FlyerChatTextMessage(
+                    message: message,
+                    index: index,
+                    showTime: false,
+                    showStatus: false,
+                    receivedBackgroundColor: Colors.transparent,
+                    padding: message.authorId == _agent.id
+                        ? EdgeInsets.zero
+                        : const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 10,
+                          ),
+                  ),
+              textStreamMessageBuilder:
+                  (
+                    context,
+                    message,
+                    index, {
+                    required bool isSentByMe,
+                    MessageGroupStatus? groupStatus,
+                  }) {
+                    final streamState = context
+                        .watch<GeminiStreamManager>()
+                        .getState(message.streamId);
+                    return FlyerChatTextStreamMessage(
+                      message: message,
+                      index: index,
+                      streamState: streamState,
+                      chunkAnimationDuration: _kChunkAnimationDuration,
+                      showTime: false,
+                      showStatus: false,
+                      receivedBackgroundColor: Colors.transparent,
+                      padding: message.authorId == _agent.id
+                          ? EdgeInsets.zero
+                          : const EdgeInsets.symmetric(
+                              horizontal: 14,
+                              vertical: 10,
+                            ),
+                    );
+                  },
             ),
             chatController: _chatController,
             crossCache: _crossCache,
@@ -221,8 +223,9 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
       ),
     );
 
-    // Scroll the user's own message into view before the AI starts responding.
-    _autoScroller.onNewContent();
+    // Reset scroller to bottom when sending a message, even if user scrolled up.
+    // This ensures the new message and AI response are visible.
+    _autoScroller.resetToBottom();
 
     _sendContent(Content.text(text));
   }

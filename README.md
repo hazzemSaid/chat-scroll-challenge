@@ -15,6 +15,27 @@ https://github.com/user-attachments/assets/5a00dc5c-d4b6-4e99-8164-73af83554ed1
 
 
 
+## Live Demo
+
+[https://hazzemSaid.github.io/chat-scroll-challenge/](https://hazzemSaid.github.io/chat-scroll-challenge/)
+
+## Screen Recordings
+
+### Scenario 1: Basic Auto-Scroll
+Watch as the chat automatically scrolls to follow new incoming messages during streaming.
+
+### Scenario 2: Pause on Manual Scroll
+Watch as auto-scroll pauses when you manually scroll up to read earlier messages.
+
+### Scenario 3: Send While Scrolled Up
+Watch as sending a new message while scrolled up seamlessly brings you back to the bottom to see your message and the AI response.
+
+### Scenario 4: Resume Auto-Scroll After Scroll Down
+
+https://github.com/user-attachments/assets/673aa7b3-fe41-40b2-9da3-5395fa759517
+
+Watch as auto-scroll automatically resumes when you scroll back down to the bottom while a stream is active.
+
 ## The Problem
 
 This app uses [flutter_chat_ui](https://github.com/flyerhq/flutter_chat_ui) to display a streaming chat with Google Gemini. When you send a message, the AI response streams in token by token.
@@ -36,9 +57,6 @@ I have implemented a robust `ChatAutoScroller` that manages the chat's scroll st
 - **Auto-Resume**: Returning to the bottom now automatically re-activates the follow-along behavior for active streams.
 - **Respectful Send Behavior**: Sending a message while scrolled up now keeps your current view, only auto-scrolling if you are already at the bottom.
 - **Stop Button Availability**: The stop button was previously tied to ephemeral state; now uses a provider-backed scroller state for better reliability.
-
-## Deployed URL
-[https://hazzemSaid.github.io/chat-scroll-challenge/](https://hazzemSaid.github.io/chat-scroll-challenge/)
 
 ## Evaluation
 - [x] Auto-scroll during streaming

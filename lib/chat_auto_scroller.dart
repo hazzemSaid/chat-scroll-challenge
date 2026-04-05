@@ -48,6 +48,11 @@ class ChatAutoScroller extends ChangeNotifier {
     _framesToScroll = 0;
   }
 
+  void resetToBottom() {
+    _setAtBottom(true);
+    _kickScroll(insertionFrames);
+  }
+
   void _setStreaming(bool value) {
     if (_isStreaming == value) return;
     _isStreaming = value;
